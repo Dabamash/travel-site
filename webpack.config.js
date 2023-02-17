@@ -13,8 +13,14 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  devServer: {
+    static: path.join(__dirname, 'dist'),
+    hot: false,
+    open: true,
+    port: 3000,
+    host: '0.0.0.0',
+  },
   mode: "development",
-  watch: true,
   module: {
     rules: [
       {
