@@ -1,3 +1,4 @@
+const currentTask = process.env.npm_lifecycle_event
 const path = require('path');
 
 const postCSSPlugins = [
@@ -9,26 +10,50 @@ const postCSSPlugins = [
   require("postcss-hexrgba"),
 ]
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+let config = {
+  entry: './app/assets/scripts/App.js',
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader', {
+          loader: 'postcss-loader', 
+          options: {
+            postcssOptions: {
+              plugins: postCSSPlugins}
+          }
+        }],
+      },
+      {
+        test: /\.(jpg|png|svg|gif)$/,
+        type: 'asset/inline',
+      },
+    ],
   },
-  devServer: {
-    static: path.join(__dirname, 'dist'),
+};
+
+if (currentTask == 'dev') {
+  config.output = {
+    filename: 'bundled.js',
+    path: path.resolve(__dirname, 'app'),
+  },
+  config.devServer = {
+    static: path.join(__dirname, 'app'),
     hot: false,
     open: true,
     port: 3000,
     host: '0.0.0.0',
   },
-  mode: "development",
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader', {loader: 'postcss-loader', options: {postcssOptions: {plugins: postCSSPlugins}}} ],
-      },
-    ],
-  },
+  config.mode = "development"
 };
+
+if (currentTask == 'build') {
+  config.output = {
+    filename: 'bundled.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  config.mode = "production"
+};
+
+
+module.exports = config
