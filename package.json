@@ -12,13 +12,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "css-minimizer-webpack-plugin": "^4.2.2",
     "lodash": "^4.17.21",
     "postcss-nested": "^6.0.0",
     "postcss-preset-env": "^8.0.1",
     "postcss-simple-vars": "^7.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
+    "fs-extra": "^11.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
     "normalize": "^0.3.1",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.21",
