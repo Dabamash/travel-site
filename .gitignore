@@ -28,3 +28,5 @@ nbproject
 .komodotools
 _notes
 dwsync.xml
+# Local Netlify folder
+.netlify
